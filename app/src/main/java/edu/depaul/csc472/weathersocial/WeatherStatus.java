@@ -194,7 +194,7 @@ public class WeatherStatus extends Activity {
             }
 
             for(int i=0 ;i < 5; i++) {
-                String maxMinTemp = list_W.get(i).getMaxtempF() + symbol +"F/"+list_W.get(i).getMaxtempF()+symbol+"F";
+                String maxMinTemp = list_W.get(i).getMintempF() + symbol +"F/"+list_W.get(i).getMaxtempF()+symbol+"F";
                 List<Hourly> hourly = list_W.get(i).getHourly();
                 String tempurl = hourly.get(4).getWeatherIconUrl().get(0).getValue();
                 tempurl = iconName(tempurl);
