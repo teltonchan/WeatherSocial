@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,7 +30,7 @@ public class MapHandler implements LocationListener,GoogleMap.OnMapClickListener
     private final float MIN_DISTANCE = 0; // in Meters --> 1 meter.
     private final Context mainActivity;
     private final GoogleMap map;
-    private final LatLng currentLoc;
+    private LatLng currentLoc;
 
 
     MapHandler(Context mainActivity, GoogleMap map){
@@ -37,7 +38,8 @@ public class MapHandler implements LocationListener,GoogleMap.OnMapClickListener
         this.mainActivity = mainActivity;
         this.currentLoc = getCurrentLocation();
         if(currentLoc == null){
-            throw new IllegalArgumentException();
+            this.currentLoc = new LatLng(41.8500300,-87.6500500);
+            Toast.makeText(mainActivity,"Can't find location. Back to Chicago as default.",Toast.LENGTH_LONG).show();
         }
     }
 

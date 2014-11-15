@@ -30,6 +30,8 @@ public class WeatherStatus extends Activity {
     private MapHandler locationHandler;
 
     private CurrentWeather mainView;
+    private CurrentWeather HourlyView;
+
     private String currentCity;
     private GoogleMap map;
 
@@ -48,8 +50,9 @@ public class WeatherStatus extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        try {
 
+
+        try {
                 currentCity = locationHandler.getCurrentCity();
                 mainView.setMainCity(currentCity);
 
@@ -98,24 +101,21 @@ public class WeatherStatus extends Activity {
 
         view.add(new WeatherView((TextView) findViewById(R.id.date1),
                 (TextView) findViewById(R.id.temp1),
-                //(TextView) findViewById(R.id.status1),
                 (ImageView) findViewById(R.id.forecastImage1)));
         view.add(new WeatherView((TextView) findViewById(R.id.date2),
                 (TextView) findViewById(R.id.temp2),
-                //(TextView) findViewById(R.id.status2),
                 (ImageView) findViewById(R.id.forecastImage2)));
         view.add(new WeatherView((TextView) findViewById(R.id.date3),
                 (TextView) findViewById(R.id.temp3),
-                //(TextView) findViewById(R.id.status3),
                 (ImageView) findViewById(R.id.forecastImage3)));
         view.add(new WeatherView((TextView) findViewById(R.id.date4),
                 (TextView) findViewById(R.id.temp4),
-                //(TextView) findViewById(R.id.status4),
                 (ImageView) findViewById(R.id.forecastImage4)));
         view.add(new WeatherView((TextView) findViewById(R.id.date5),
                 (TextView) findViewById(R.id.temp5),
-               // (TextView) findViewById(R.id.status5),
                 (ImageView) findViewById(R.id.forecastImage5)));
+
+        //add hourly dynamically
 
 
     }
@@ -207,6 +207,9 @@ public class WeatherStatus extends Activity {
             }
 
 
+
+
+
             /******************************************************************************************
              * this section for the 1 section
              */
@@ -242,7 +245,7 @@ public class WeatherStatus extends Activity {
             pp.setImageResource(j);
 
 
-            //loop all the image to the 5 day forcast.
+
 
 
 
