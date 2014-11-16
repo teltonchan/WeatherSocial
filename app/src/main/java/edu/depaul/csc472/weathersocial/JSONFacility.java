@@ -36,7 +36,7 @@ public class JSONFacility {
     private HttpClient client;
     private final String tag = "JSONFacility";
     private final String beginURL = "http://api.worldweatheronline.com/free/v2/weather.ashx?key=dd00837af36c5783d51c011d0b899b8cccabd18a&&q=";
-    private final String endURL = "&format=json&num_of_days=7";
+    private final String endURL = "&format=json&num_of_days=5";
     private final String Url;
 
 

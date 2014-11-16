@@ -30,7 +30,7 @@ public class WeatherStatus extends Activity {
     private MapHandler locationHandler;
 
     private CurrentWeather mainView;
-    private CurrentWeather HourlyView;
+    private final List<WeatherView> HourlyView  = new ArrayList<WeatherView>();
 
     private String currentCity;
     private GoogleMap map;
@@ -115,8 +115,34 @@ public class WeatherStatus extends Activity {
                 (TextView) findViewById(R.id.temp5),
                 (ImageView) findViewById(R.id.forecastImage5)));
 
-        //add hourly dynamically
 
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate1),
+                (TextView) findViewById(R.id.hourlytemp1),
+                (ImageView) findViewById(R.id.hourlyforecastImage1)));
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate2),
+                (TextView) findViewById(R.id.hourlytemp2),
+                (ImageView) findViewById(R.id.hourlyforecastImage2)));
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate3),
+                (TextView) findViewById(R.id.hourlytemp3),
+                (ImageView) findViewById(R.id.hourlyforecastImage3)));
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate4),
+                (TextView) findViewById(R.id.hourlytemp4),
+                (ImageView) findViewById(R.id.hourlyforecastImage4)));
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate5),
+                (TextView) findViewById(R.id.hourlytemp5),
+                (ImageView) findViewById(R.id.hourlyforecastImage5)));
+
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate6),
+                (TextView) findViewById(R.id.hourlytemp6),
+                (ImageView) findViewById(R.id.hourlyforecastImage6)));
+
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate7),
+                (TextView) findViewById(R.id.hourlytemp7),
+                (ImageView) findViewById(R.id.hourlyforecastImage7)));
+
+        HourlyView.add(new WeatherView((TextView) findViewById(R.id.hourlydate8),
+                (TextView) findViewById(R.id.hourlytemp8),
+                (ImageView) findViewById(R.id.hourlyforecastImage8)));
 
     }
 
@@ -193,6 +219,9 @@ public class WeatherStatus extends Activity {
                 list_W.add(facility.getWeather().get(i));
             }
 
+
+            //list_W = facility.getWeather();
+
             for(int i=0 ;i < 5; i++) {
                 String maxMinTemp = list_W.get(i).getMintempF() + symbol +"F/"+list_W.get(i).getMaxtempF()+symbol+"F";
                 List<Hourly> hourly = list_W.get(i).getHourly();
@@ -205,9 +234,6 @@ public class WeatherStatus extends Activity {
                 view.get(i).setTemp(maxMinTemp);
 
             }
-
-
-
 
 
             /******************************************************************************************
@@ -245,7 +271,24 @@ public class WeatherStatus extends Activity {
             pp.setImageResource(j);
 
 
+            /******************************************************************************************
+             * This will pupulate the hourly
+             */
 
+            List<Hourly> H = weatherDay1.getHourly();
+
+            for(int i=0 ;i < 8; i++) {
+
+                //for the Icon
+                String tempurl = H.get(i).getWeatherIconUrl().get(0).getValue();
+                tempurl = iconName(tempurl);
+                int W_image = getResources().getIdentifier(tempurl, "drawable", getPackageName());
+
+                HourlyView.get(i).setDate(convertTimeFormat(H.get(i).getTime()));
+                HourlyView.get(i).setTemp(H.get(i).getTempF()+ symbol +"F - "+H.get(i).getWeatherDesc().get(0).getWD());
+                HourlyView.get(i).setImage(W_image);
+
+            }
 
 
 
@@ -303,6 +346,28 @@ public class WeatherStatus extends Activity {
             int last = name.lastIndexOf(".png");
             return name.substring(first,last);
 
+        }
+
+        private String convertTimeFormat(String Miltarytime){
+            String AMPM = "";
+            if(Miltarytime.equals("100"))
+                AMPM = "1 AM";
+            else if(Miltarytime.equals("400"))
+                AMPM =  "4 AM";
+            else if(Miltarytime.equals("700"))
+                AMPM =  "7 AM";
+            else if(Miltarytime.equals("1000"))
+                AMPM =  "10 AM";
+            else if(Miltarytime.equals("1300"))
+                AMPM =  "1 PM";
+            else if(Miltarytime.equals("1600"))
+                AMPM =  "4 PM";
+            else if(Miltarytime.equals("1900"))
+                AMPM =  "7 PM";
+            else if(Miltarytime.equals("2200"))
+                AMPM =  "10 PM";
+
+            return AMPM;
         }
 
     }
